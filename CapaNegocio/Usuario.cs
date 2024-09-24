@@ -9,6 +9,6 @@ namespace CapaNegocio
     internal class Usuario
     {
         public string Usuarios { get; set; }    
-        public string Contrasena { get; set; }
+        public string Contraseña { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using System.Configuration; //Cadena de conexion
 
 namespace CapaNegocio
 {
-    internal class Carrera
+    public class Carrera
     {
         //cadena de conexion
         private static string cadena = ConfigurationManager.ConnectionStrings["Cadena"].ConnectionString;
@@ -24,7 +24,7 @@ namespace CapaNegocio
         //implmentar los metodos de clase
         public DataTable Listar()
         {
-            using (SqlConnection conexion = new SqlConnection())
+            using (SqlConnection conexion = new SqlConnection(cadena))
             {
                 string consulta = "select * from TCarrera";
                 SqlDataAdapter adapter = new SqlDataAdapter(consulta, conexion);
@@ -35,9 +35,9 @@ namespace CapaNegocio
         }
         public bool Agregar()
         {
-            using(SqlConnection conexion = new SqlConnection())
+            using(SqlConnection conexion = new SqlConnection(cadena))
             {
-                string consulta = "insert into TCarrera values (CodCarrera=@CodCarrera, Carrera = @NombreCarrera)";
+                string consulta = "insert into TCarrera values (@CodCarrera, @NombreCarrera)";
                 SqlCommand comando = new SqlCommand(consulta, conexion);
                 comando.Parameters.AddWithValue("@CodCarrera", CodCarrera);
                 comando.Parameters.AddWithValue("@NombreCarrera", NombreCarrera);
@@ -49,7 +49,7 @@ namespace CapaNegocio
         }
         public bool Eliminar()
         {
-            using (SqlConnection conexion = new SqlConnection())
+            using (SqlConnection conexion = new SqlConnection(cadena))
             {
                 string consulta = "delete from TCarrera where CodCarrera = @CodCarrera";
                 SqlCommand comando = new SqlCommand(consulta, conexion);
@@ -62,7 +62,7 @@ namespace CapaNegocio
         }
         public bool Actualizar()
         {
-            using (SqlConnection conexion = new SqlConnection())
+            using (SqlConnection conexion = new SqlConnection(cadena))
             {
                 string consulta = "update TCarrera set Carrera=@NombreCarrera where CodCarrera=@CodCarrera";
                 SqlCommand comando = new SqlCommand(consulta, conexion);
@@ -76,11 +76,11 @@ namespace CapaNegocio
         }
         public DataTable Buscar()
         {
-            using (SqlConnection conexion = new SqlConnection())
+            using (SqlConnection conexion = new SqlConnection(cadena))
             {
-                string consulta = "select * from TCarerra where CodCarrera = @CodCarrera";
+                string consulta = "select * from TCarrera where CodCarrera = @CodCarrera";
                 SqlCommand comando = new SqlCommand(consulta, conexion);
-                comando.Parameters.AddWithValue("@CodCarerra", CodCarrera);
+                comando.Parameters.AddWithValue("@CodCarrera", CodCarrera);
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 DataTable tabla = new DataTable();
                 adapter.Fill(tabla);
