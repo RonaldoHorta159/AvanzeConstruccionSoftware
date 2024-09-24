@@ -40,7 +40,7 @@ namespace CapaPresentacion
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             Carrera carrera = new Carrera();
-            carrera.CodCarrera  =txtBuscar.Text.Trim();
+            carrera.CodCarrera  = txtBuscar.Text.Trim();
             gvCarrera.DataSource = carrera.Buscar();
             gvCarrera.DataBind();
 

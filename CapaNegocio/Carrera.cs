@@ -81,7 +81,7 @@ namespace CapaNegocio
                 string consulta = "select * from TCarrera where CodCarrera = @CodCarrera";
                 SqlCommand comando = new SqlCommand(consulta, conexion);
                 comando.Parameters.AddWithValue("@CodCarrera", CodCarrera);
-                SqlDataAdapter adapter = new SqlDataAdapter();
+                SqlDataAdapter adapter = new SqlDataAdapter(comando);
                 DataTable tabla = new DataTable();
                 adapter.Fill(tabla);
                 return tabla;
